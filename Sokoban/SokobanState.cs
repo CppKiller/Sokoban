@@ -31,6 +31,22 @@ namespace Sokoban
 						break;
 					}
 				}
+				if (result == true)
+				{
+					int[,] objMatrix = ((SokobanState)obj).matrix;
+					int xCount = matrix.GetLength(0);
+					int yCount = matrix.GetLength(1);
+					for (int x = 0; x < xCount && result == true; x++)
+					{
+						for (int y = 0; y < yCount && result == true; y++)
+						{
+							if (matrix[x, y] == objMatrix[x, y])
+							{
+								result = false;
+							}
+						}
+					}
+				}
 				return result;
 			}
 			return false;
@@ -44,6 +60,22 @@ namespace Sokoban
 				code += movement.GetHashCode();
 			}
 			return code;
+		}
+
+		public override string ToString()
+		{
+			string result = "";
+			int xCount = matrix.GetLength(0);
+			int yCount = matrix.GetLength(1);
+			for (int y = 0; y < yCount; y++)
+			{
+				for (int x = 0; x < xCount; x++)
+				{
+					result += matrix[x, y] + " ";
+				}
+				result += "\n";
+			}
+			return result;
 		}
 
 		public bool IsSolved()
